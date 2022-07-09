@@ -1,5 +1,5 @@
 .filters {
-	display: block;
+	/*display: block;*/
 	background-color: white;
 	height: 70px;
 	width: 100%;
@@ -10,6 +10,7 @@
 .locations {
 	display: inline;
 	vertical-align: middle;
+
 	float: left;
 	height: 100%;
 	width: 25%;
@@ -19,13 +20,14 @@
 }
 
 .amenities {
-	display: inline;
+	display: inline-block;
 	vertical-align: middle;
 	height: 100%;
-	float: left;
+	/*float: left;*/
 	width: 25%;
 
 	line-height: 20px;
+	/*margin-left: 45px;*/
 	border-right: 1 px solid #DDDDDD;
 }
 
@@ -59,8 +61,8 @@ ul {
 	padding-bottom: 20px;
 }
 
-li {
-}	
+/*li {
+}*/	
 
 h2 {
 	font-size: 16px;

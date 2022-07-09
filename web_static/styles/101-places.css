@@ -92,7 +92,7 @@ h1 {
 	font-size: 30px;
 }
 
-article .amenities {
+amenities_ {
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;

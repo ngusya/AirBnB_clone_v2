@@ -92,11 +92,17 @@ h1 {
 	font-size: 30px;
 }
 
-article .amenities {
+.a_amenities {
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
 	margin-top: 40px;
+}
+
+.article_title {
+    font-size: 30px;
+    margin: 10px auto;
+    padding: 0px;
 }
 
 .article_subtitle {
@@ -107,12 +113,6 @@ article .amenities {
 	padding: 0px;
 	margin: 0px;
 	padding-bottom: 10px;
-}
-
-.article_title {
-	font-size: 30px;
-	margin: 10px auto;
-	padding: 0px;
 }
 
 article ul {
@@ -186,6 +186,7 @@ article h3 {
 	height: 20px;
 
 	margin-right: 10px;
+	margin-top: 5px;
 }
 
 .wifi_icon {
@@ -195,7 +196,8 @@ article h3 {
 	width: 20px;
     height: 20px;
 
-	margin-right: 10px;
+    margin-right: 10px;
+    
 }
 
 .pet_icon {
