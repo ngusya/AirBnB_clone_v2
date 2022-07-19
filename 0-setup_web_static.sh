@@ -34,7 +34,7 @@ chown -R ubuntu /data/
 chgrp -R ubuntu /data/                                                                             
                                                                                                    
 #Updates the Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static  
-sed -i '/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}' /et
+sed -i '/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}' /etc/nginx/sites-available/default
                                                                                                    
 #Restarts Nginx                                                                                    
 service nginx restart                                                                              
