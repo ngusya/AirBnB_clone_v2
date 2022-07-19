@@ -8,8 +8,10 @@
 # Creates /data/web_static/releases/test/ and /data/web_static/shared/ folders                     
  mkdir -p /data/                                                                               
  mkdir -p /data/web_static/                                                                    
- mkdir -p /data/web_static/releases/test/                                                      
- mkdir -p /data/web_static/shared/                                                             
+ mkdir -p /data/web_static/releases/                                                      
+ mkdir -p /data/web_static/shared/
+ mkdir -p /data/web_static/releases/test/
+ 
 #Creates a sample html file                                                                        
  echo "<html>                                                                                  
             <head>                                                                                     
@@ -34,8 +36,7 @@ chgrp -R ubuntu /data/
 #Updates the Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static  
 sed -i '/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}
                                                                                                    
-#Restarts Nginx                                                                                    
-service nginx restart
+#Restarts Nginx                                                                 service nginx restart
 
 #Ensures program exits successfully
 exit 0
