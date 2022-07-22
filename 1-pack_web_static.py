@@ -1,16 +1,13 @@
 #!/usr/bin/python3
-""" Fabfile generates a .tgz archive from the contents of web_static folder."""
-
-from fabric.operations import local
+# Fabfile to generates a .tgz archive from the contents of web_static.
+import os.path
 from datetime import datetime
-"""from fabric.api import local"""
+from fabric.api import local
 
-env.user = 'ubuntu'
-env.hosts = ['100.24.209.37', '3.237.5.93']
 
 def do_pack():
-    """Compress files from the directory /web_static."""
-    dt = datetime.now()
+    """Create a tar gzipped archive of the directory web_static."""
+    dt = datetime.utcnow()
     file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
                                                          dt.month,
                                                          dt.day,
