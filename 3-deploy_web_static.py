@@ -9,6 +9,7 @@ import os.path
 from fabric.api import env
 from fabric.api import put
 from fabric.api import run
+from os.path import exists
 import re
 
 
@@ -22,8 +23,7 @@ def do_pack():
     try:
         dt = "web_static_" + datetime.now().strftime("%Y%m%d%H%M%S")
         local('mkdir -p versions')
-        local("tar -cvzf versions/{}.tgz {}".format(
-          dt, "web_static/"))
+        local("tar -cvzf versions/{}.tgz {}".format( dt, "web_static/"))
         size = os.path.getsize("./versions/{}.tgz".format(dt))
         print("web_static packed: versions/{}.tgz -> {}Bytes".format(dt, size))
     except:
@@ -71,9 +71,11 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """Creates and distributes an archive to the web servers"""
-    filepath = do_pack()
-    if filepath is None:
+    """ creates and distributes an archive to your web servers
+    """
+    new_archive_path = do_pack()
+    if exists(new_archive_path) is False:
         return False
-    p = do_deploy(filepath)
-    return p
+    result = do_deploy(new_archive_path)
+    return result
+
