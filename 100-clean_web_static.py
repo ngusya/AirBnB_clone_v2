@@ -15,8 +15,7 @@ def do_clean(number=0):
     etc.
     """
     n = int(number)
-    number = 1 if n  == 0 else n
-
+    number = 1 if n == 0 else n
     archives = sorted(os.listdir("versions"))
     [archives.pop() for i in range(number)]
     with lcd("versions"):
