@@ -1,33 +1,32 @@
 #!/usr/bin/python3
-"""Generates a .tgz archive from the
-contents of the web_static folder
-Distributes an archive to a web server"""
-
-from fabric.operations import local
-from datetime import datetime
+# Fabfile to create and distribute an archive to a web server.
 import os.path
+from datetime import datetime
 from fabric.api import env
+from fabric.api import local
 from fabric.api import put
 from fabric.api import run
-from os.path import exists
-import re
 
-
-env.hosts = ['100.24.209.37', '3.237.5.93']
 env.user = 'ubuntu'
+env.hosts = ["100.24.209.37", "3.237.5.93"]
 env.key_filename = '~/.ssh/id_rsa.pub'
 
 
 def do_pack():
     """Create a tar gzipped archive of the directory web_static."""
-    try:
-        dt = "web_static_" + datetime.now().strftime("%Y%m%d%H%M%S")
-        local('mkdir -p versions')
-        local("tar -cvzf versions/{}.tgz {}".format( dt, "web_static/"))
-        size = os.path.getsize("./versions/{}.tgz".format(dt))
-        print("web_static packed: versions/{}.tgz -> {}Bytes".format(dt, size))
-    except:
+    dt = datetime.utcnow()
+    file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
+                                                         dt.month,
+                                                         dt.day,
+                                                         dt.hour,
+                                                         dt.minute,
+                                                         dt.second)
+    if os.path.isdir("versions") is False:
+        if local("mkdir -p versions").failed is True:
+            return None
+    if local("tar -cvzf {} web_static".format(file)).failed is True:
         return None
+    return file
 
 
 def do_deploy(archive_path):
@@ -71,11 +70,8 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """ creates and distributes an archive to your web servers
-    """
-    new_archive_path = do_pack()
-    if exists(new_archive_path) is False:
+    """Create and distribute an archive to a web server."""
+    file = do_pack()
+    if file is None:
         return False
-    result = do_deploy(new_archive_path)
-    return result
-
+    return do_deploy(file)
